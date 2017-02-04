@@ -2,15 +2,17 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import axios from 'axios';
 import App from './App';
 import Movies from './components/Movies';
 
 Vue.use(VueRouter);
 
+Vue.prototype.$axios = axios;
+
 const router = new VueRouter({
   routes: [
-    { path: '/', component: Movies },
-    { path: '/movies', component: Movies },
+    { path: '/movies', component: Movies, alias: '/' },
     // { path: "/list", component: List},
   ],
 });

@@ -13,6 +13,8 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "axios": "^0.15.3",
+    "node-sass": "^4.5.0",
     "vue": "^2.1.0",
     "vue-router": "^2.2.0"
   },
@@ -61,7 +63,6 @@
     "lolex": "^1.4.0",
     "mocha": "^3.1.0",
     "nightwatch": "^0.9.8",
-    "node-sass": "^4.5.0",
     "opn": "^4.0.2",
     "ora": "^0.3.0",
     "phantomjs-prebuilt": "^2.1.3",
