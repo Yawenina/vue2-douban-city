@@ -30,7 +30,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
-    color: #111;
   }
   body{
     font-size: 12px;

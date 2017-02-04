@@ -10,27 +10,23 @@
         </div>
       </section>
 
-      <section id="movie-free-stream">
+      <section id="movie-coming-soon">
         <header>
-          <h2>免费在线观影</h2>
+          <h2>即将上映</h2>
           <a href="/">更多</a>
         </header>
         <div class="section-content">
-          <ul class="row items">
-            <li class="item" v-for="item in free"></li>
-          </ul>
+          <List :items="comming"></List>
         </div>
       </section>
 
       <section id="movie-latest">
         <header>
-          <h2>新片速递</h2>
+          <h2>Top250</h2>
           <a href="/">更多</a>
         </header>
         <div class="section-content">
-          <ul class="row items">
-            <li class="item" v-for="item in latest"></li>
-          </ul>
+          <List :items="top"></List>
         </div>
       </section>
 
@@ -47,16 +43,17 @@
     data() {
       return {
         showing: [],
-        free: [],
-        latest: [],
+        comming: [],
+        top: [],
       };
     },
-    mounted() {
-      this.$axios.get('/v2/movie/in_theaters', {
-        headers: {
-          'Content-type': 'application/json'
-        }
-      }).then(response => this.showing = response.data.subjects.slice(0, 8));
+    created() {
+      this.$axios.get('/v2/movie/in_theaters')
+          .then(response => this.showing = response.data.subjects.slice(0, 8));
+      this.$axios.get('/v2/movie/coming_soon')
+        .then(response => this.comming = response.data.subjects.slice(0, 8));
+      this.$axios.get('/v2/movie/top250')
+        .then(response => this.top = response.data.subjects.slice(0, 8));
     },
   };
 </script>
