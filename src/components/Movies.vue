@@ -3,7 +3,7 @@
       <section id="movie-showing">
         <header>
           <h2>影院热映</h2>
-          <a href="/">更多</a>
+          <router-link to="/movie/in_theaters">更多</router-link>
         </header>
         <div class="section-content">
           <List :items="showing"></List>
@@ -13,7 +13,7 @@
       <section id="movie-coming-soon">
         <header>
           <h2>即将上映</h2>
-          <a href="/">更多</a>
+          <router-link to="/movie/coming_soon">更多</router-link>
         </header>
         <div class="section-content">
           <List :items="comming"></List>
@@ -23,7 +23,7 @@
       <section id="movie-latest">
         <header>
           <h2>Top250</h2>
-          <a href="/">更多</a>
+          <router-link to="/movie/top250">更多</router-link>
         </header>
         <div class="section-content">
           <List :items="top"></List>

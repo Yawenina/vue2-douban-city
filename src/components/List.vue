@@ -26,7 +26,7 @@
   };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .items{
     white-space: nowrap;
     padding: 15px 0 20px 0;
