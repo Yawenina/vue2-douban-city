@@ -1,0 +1,21 @@
+.card section{
+  overflow: hidden;
+  &:first-child{
+    padding-top: 10px;
+  }
+
+  header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1.12rem;
+
+    h2{
+      font-size: 1.06rem;
+      font-weight: normal;
+    }
+    a{
+      color: #42bd56;
+      font-size: .9rem;
+    }
+  }
+}
