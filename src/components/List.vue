@@ -1,27 +1,30 @@
 <template>
   <ul class="row items">
     <li v-for="item in items" class="item">
-      <a>
+      <router-link :to="'/movie/subject/' + item.id">
         <img class="item-poster" :src="item.images.large">
         <p class="item-title">{{item.title}}</p>
         <div class="item-rating">
           <div class="rank">
-            <span class="rating-stars">
-              <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-            </span>
+            <rating-stars :average="item.rating.average"></rating-stars>
             <span>{{item.rating.average}}</span>
           </div>
         </div>
-      </a>
+      </router-link>
     </li>
   </ul>
 </template>
 
 <script>
+  import ratingStars from './ratingStars';
+
   export default {
     name: 'List',
     props: {
       items: Array,
+    },
+    components: {
+      ratingStars,
     },
   };
 </script>

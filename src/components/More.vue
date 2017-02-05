@@ -55,6 +55,7 @@
     height:140px;
   }
   .item-title{
+    white-space:nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }

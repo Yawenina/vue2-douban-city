@@ -35,6 +35,7 @@
     font-size: 12px;
   }
   a{
+    color: #111;
     text-decoration: none;
   }
   .topNav-primary{

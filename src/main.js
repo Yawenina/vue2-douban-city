@@ -6,6 +6,7 @@ import axios from 'axios';
 import App from './App';
 import Movies from './components/Movies';
 import More from './components/More';
+import Subject from './components/Subject';
 
 Vue.use(VueRouter);
 
@@ -13,9 +14,9 @@ Vue.prototype.$axios = axios;
 
 const router = new VueRouter({
   routes: [
-    { path: '/movies', component: Movies, alias: '/' },
     { path: '/:category/:type', component: More },
-    // { path: "/list", component: List},
+    { path: '/movies', component: Movies, alias: '/' },
+    { path: '/movie/subject/:id', component: Subject },
   ],
 });
 
