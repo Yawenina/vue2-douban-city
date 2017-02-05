@@ -91,7 +91,8 @@
   }
   .rating-average{
     color: #111;
-    font-size: 1.5em;
+    font-size: 1.8em;
+    font-weight: bold;
   }
   .subject-pics ul{
     display: flex;

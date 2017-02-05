@@ -4,6 +4,9 @@
     </span>
 </template>
 <style>
+  .star{
+    color: #aaa;
+  }
   .star.full-star {
     color: #FDB631;
   }

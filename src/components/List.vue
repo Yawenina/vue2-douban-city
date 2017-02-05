@@ -6,8 +6,8 @@
         <p class="item-title">{{item.title}}</p>
         <div class="item-rating">
           <div class="rank">
-            <rating-stars :average="item.rating.average"></rating-stars>
-            <span>{{item.rating.average}}</span>
+            <rating-stars :average="item.rating.average" v-if="item.rating.average"></rating-stars>
+            <span>{{item.rating.average ? item.rating.average : "暂无评分"}}</span>
           </div>
         </div>
       </router-link>

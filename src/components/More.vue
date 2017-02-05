@@ -7,9 +7,7 @@
           <p class="item-title">{{item.title}}</p>
           <div class="item-rating">
             <div class="rank">
-          <span class="rating-stars">
-            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-          </span>
+              <rating-stars :average="item.rating.average"></rating-stars>
               <span>{{item.rating.average}}</span>
             </div>
           </div>
@@ -18,9 +16,13 @@
 </template>
 
 <script>
-  /* eslint-disable */
+  import ratingStars from './ratingStars';
+
   export default {
     name: 'more',
+    components: {
+      ratingStars,
+    },
     data() {
       return {
         items: [],
@@ -28,9 +30,9 @@
     },
     created() {
       const routeParams = this.$route.params;
-      const api = '/v2/' + routeParams.category + '/' + routeParams.type;
+      const api = `/v2/${routeParams.category}/${routeParams.type}`;
       this.$axios.get(api)
-        .then(response => this.items = response.data.subjects.slice(0, 18));
+        .then(response => (this.items = response.data.subjects.slice(0, 18)));
     },
   };
 </script>
@@ -42,7 +44,6 @@
     flex-wrap: wrap;
     padding-top: 20px;
   }
-
   .item{
     width:33.33333%;
     padding-left: 4%;
