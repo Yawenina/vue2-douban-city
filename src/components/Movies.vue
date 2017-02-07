@@ -1,5 +1,9 @@
 <template>
-    <div class="card">
+  <div class="card">
+    <div class="loading-wrapper" v-if="showLoading">
+      <loading></loading>
+    </div>
+    <template v-else>
       <section id="movie-showing">
         <header>
           <h2>影院热映</h2>
@@ -29,19 +33,20 @@
           <List :items="top"></List>
         </div>
       </section>
-
-    </div>
+    </template>
+  </div>
 </template>
 
 <script>
-  /* eslint-disable */
-  import List from './List.vue';
+  import Loading from './Loading';
+  import List from './List';
 
   export default {
     name: 'movies',
-    components: { List },
+    components: { List, Loading },
     data() {
       return {
+        showLoading: true,
         showing: [],
         comming: [],
         top: [],
@@ -49,11 +54,11 @@
     },
     created() {
       this.$axios.get('/v2/movie/in_theaters')
-          .then(response => this.showing = response.data.subjects.slice(0, 8));
+          .then((response) => { this.showing = response.data.subjects.slice(0, 8); });
       this.$axios.get('/v2/movie/coming_soon')
-        .then(response => this.comming = response.data.subjects.slice(0, 8));
+        .then((response) => { this.comming = response.data.subjects.slice(0, 8); });
       this.$axios.get('/v2/movie/top250')
-        .then(response => this.top = response.data.subjects.slice(0, 8));
+        .then((response) => { this.top = response.data.subjects.slice(0, 8); });
     },
   };
 </script>
