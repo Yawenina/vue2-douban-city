@@ -20,7 +20,7 @@
           <router-link to="/movie/coming_soon">更多</router-link>
         </header>
         <div class="section-content">
-          <List :items="comming"></List>
+          <List :items="coming"></List>
         </div>
       </section>
 
@@ -48,17 +48,35 @@
       return {
         showLoading: true,
         showing: [],
-        comming: [],
+        coming: [],
         top: [],
       };
     },
-    created() {
-      this.$axios.get('/v2/movie/in_theaters')
-          .then((response) => { this.showing = response.data.subjects.slice(0, 8); });
-      this.$axios.get('/v2/movie/coming_soon')
-        .then((response) => { this.comming = response.data.subjects.slice(0, 8); });
-      this.$axios.get('/v2/movie/top250')
-        .then((response) => { this.top = response.data.subjects.slice(0, 8); });
+    mounted() {
+//      当所有内容加载好时才显示页面，否则显示loading动画
+      this.$axios.all([this.getShowing(), this.getComing(), this.getTop()])
+        .then(this.$axios.spread((showing, coming, top) => {
+          this.showing = this.getFirstEightItems(showing.data.subjects);
+          this.coming = this.getFirstEightItems(coming.data.subjects);
+          this.top = this.getFirstEightItems(top.data.subjects);
+          this.showLoading = false;
+        }));
+    },
+    methods: {
+//      获取所需要的榜单的数据
+      getShowing() {
+        return this.$axios.get('/v2/movie/in_theaters');
+      },
+      getComing() {
+        return this.$axios.get('/v2/movie/coming_soon');
+      },
+      getTop() {
+        return this.$axios.get('/v2/movie/top250');
+      },
+//      获取榜单的前8个数据
+      getFirstEightItems(data) {
+        return data.slice(0, 8);
+      },
     },
   };
 </script>
