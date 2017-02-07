@@ -1,36 +1,38 @@
 <template>
   <div class="loading">
-    <h1>加载中...</h1>
-    <svg id="load" x="0" y="0" viewBox="0 0 150 150">
-      <circle id="load-inner" cx="75" cy="75" r="60"></circle>
+    <svg id="load" x="0" y="0" viewBox="0 0 100 100">
+      <circle id="load-inner" cx="50" cy="50" r="30"></circle>
     </svg>
+    <h1>加载中...</h1>
   </div>
 </template>
 <style lang="scss" scoped>
   .loading{
     margin:50px auto;
     text-align: center;
-    width:150px;
+    width:100px;
+    transform: translateY(50%);
      > h1 {
-       margin-bottom: 1.3em;
+       margin-top: 1.3em;
        font-weight: 300;
-       color: #8E8E8E;
+       color: #4FC456;
+       font-size: 1.2rem;
      }
   }
   #load{
-    width:150px;
+    width:100px;
     animation: loading 3s linear infinite;
     #load-inner{
       stroke: {
         width: 5;
         dashoffset: 0;
-        dasharray: 300;
+        dasharray: 200;
         miterlimit: 10;
         linecap: round;
       }
-      stroke: #51BBA7;
+      stroke: #4FC456;
       fill: transparent;
-      animation: loading-circle 2s linear infinite;
+      animation: loading-circle 3s linear infinite;
     }
   }
   @keyframes loading {
@@ -46,7 +48,7 @@
       stroke-dashoffset: 0;
     }
     100% {
-      stroke-dashoffset: -600;
+      stroke-dashoffset: -400;
     }
   }
 </style>
