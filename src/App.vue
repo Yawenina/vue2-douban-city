@@ -19,8 +19,12 @@
     </div>
 
     <div class="page">
-      <router-view></router-view>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
     </div>
+
   </div>
 </template>
 

@@ -14,7 +14,6 @@
     transform: translateY(50%);
      > h1 {
        margin-top: 1.3em;
-       font-weight: bold;
        color: #4FC456;
        font-size: 1.2rem;
      }

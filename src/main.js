@@ -15,7 +15,14 @@ Vue.prototype.$axios = axios;
 const router = new VueRouter({
   routes: [
     { path: '/:category/:type', component: More },
-    { path: '/movies', component: Movies, alias: '/' },
+    {
+      path: '/movies',
+      component: Movies,
+      meta: {
+        keepAlive: true,
+      },
+      alias: '/',
+    },
     { path: '/movie/subject/:id', component: Subject },
   ],
 });

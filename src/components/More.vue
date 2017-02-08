@@ -1,6 +1,5 @@
 <template>
     <div class="more">
-      <h1></h1>
       <div class="more-items">
         <a v-for="item in items" class="item">
           <img class="item-poster" :src="item.images.large">
