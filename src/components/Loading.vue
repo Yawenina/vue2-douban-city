@@ -14,7 +14,7 @@
     transform: translateY(50%);
      > h1 {
        margin-top: 1.3em;
-       font-weight: 300;
+       font-weight: bold;
        color: #4FC456;
        font-size: 1.2rem;
      }
@@ -27,12 +27,12 @@
         width: 5;
         dashoffset: 0;
         dasharray: 200;
-        miterlimit: 10;
+        miterlimit: 5;
         linecap: round;
       }
       stroke: #4FC456;
       fill: transparent;
-      animation: loading-circle 3s linear infinite;
+      animation: loading-circle 2s linear infinite;
     }
   }
   @keyframes loading {
@@ -48,15 +48,7 @@
       stroke-dashoffset: 0;
     }
     100% {
-      stroke-dashoffset: -400;
+      stroke-dashoffset: -100;
     }
   }
 </style>
-<script>
-  export default{
-    data() {
-      return {
-      };
-    },
-  };
-</script>
