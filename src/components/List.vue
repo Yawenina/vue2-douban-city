@@ -2,7 +2,7 @@
   <ul class="row items">
     <li v-for="item in items" class="item">
       <router-link :to="'/movie/subject/' + item.id">
-        <img class="item-poster" :src="item.images.large">
+        <img class="item-poster" v-lazy="item.images.large">
         <p class="item-title">{{item.title}}</p>
         <div class="item-rating">
           <div class="rank">

@@ -5889,6 +5889,10 @@ vue-hot-reload-api@^2.0.1:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.0.8.tgz#b3ba6a9a443d561b14f2785c8ea056618cb2faa3"
 
+vue-lazyload@^1.0.0-rc10:
+  version "1.0.0-rc10"
+  resolved "https://registry.yarnpkg.com/vue-lazyload/-/vue-lazyload-1.0.0-rc10.tgz#5e2df0729bdeb269e201406c86ddae7bc0d59cc6"
+
 vue-loader@^10.0.0:
   version "10.2.3"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-10.2.3.tgz#462d837da5b501e4b339e4c48db8ad726121be85"
