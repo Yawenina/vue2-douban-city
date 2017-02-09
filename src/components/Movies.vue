@@ -59,14 +59,14 @@
       };
     },
     mounted() {
-      this.refs.loadingBar.start();
+      this.$refs.loadingBar.start();
 //      当所有内容加载好时才显示页面，否则显示loading动画
       this.$axios.all([this.getShowing(), this.getComing(), this.getTop()])
         .then(this.$axios.spread((showing, coming, top) => {
           this.showing = this.getFirstEightItems(showing.data.subjects);
           this.coming = this.getFirstEightItems(coming.data.subjects);
           this.top = this.getFirstEightItems(top.data.subjects);
-          this.refs.loadingBar.finish();
+          this.$refs.loadingBar.finish();
           this.showLoading = false;
         }));
     },
