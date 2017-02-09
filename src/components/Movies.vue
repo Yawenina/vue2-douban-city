@@ -1,6 +1,7 @@
 <template>
   <div class="card">
     <div class="loading-wrapper" v-if="showLoading">
+      <loading-bar ref="loadingBar"></loading-bar>
       <loading></loading>
     </div>
     <template v-else>
@@ -39,11 +40,16 @@
 
 <script>
   import Loading from './Loading';
+  import loadingBar from './loadingBar';
   import List from './List';
 
   export default {
     name: 'movies',
-    components: { List, Loading },
+    components: {
+      List,
+      Loading,
+      loadingBar,
+    },
     data() {
       return {
         showLoading: true,
@@ -53,12 +59,14 @@
       };
     },
     mounted() {
+      this.refs.loadingBar.start();
 //      当所有内容加载好时才显示页面，否则显示loading动画
       this.$axios.all([this.getShowing(), this.getComing(), this.getTop()])
         .then(this.$axios.spread((showing, coming, top) => {
           this.showing = this.getFirstEightItems(showing.data.subjects);
           this.coming = this.getFirstEightItems(coming.data.subjects);
           this.top = this.getFirstEightItems(top.data.subjects);
+          this.refs.loadingBar.finish();
           this.showLoading = false;
         }));
     },
