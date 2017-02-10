@@ -11,7 +11,7 @@ import Subject from './components/Subject';
 
 Vue.use(VueRouter);
 Vue.use(VueLazyload, {
-  loading: './assets/loading.gif',
+  loading: 'static/loading.gif',
   try: 3,
 });
 
