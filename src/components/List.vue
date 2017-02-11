@@ -1,3 +1,4 @@
+<!--榜单列表-->
 <template>
   <ul class="row items">
     <li v-for="item in items" class="item">

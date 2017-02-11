@@ -32,7 +32,10 @@ const router = new VueRouter({
       },
       alias: '/',
     },
-    { path: '/movie/subject/:id', component: Subject },
+    {
+      path: '/movie/subject/:id',
+      component: Subject
+    },
   ],
 });
 

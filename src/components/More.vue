@@ -1,3 +1,4 @@
+<!--更多列表-->
 <template>
     <div class="more">
       <loading-bar ref="loadingBar"></loading-bar>
