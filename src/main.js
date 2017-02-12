@@ -6,6 +6,7 @@ import axios from 'axios';
 import VueLazyload from 'vue-lazyload';
 import App from './App';
 import Movies from './components/Movies';
+import Cities from './components/Cities';
 import More from './components/More';
 import Subject from './components/Subject';
 
@@ -34,7 +35,11 @@ const router = new VueRouter({
     },
     {
       path: '/movie/subject/:id',
-      component: Subject
+      component: Subject,
+    },
+    {
+      path: '/cities',
+      component: Cities,
     },
   ],
 });
