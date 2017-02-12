@@ -1,8 +1,18 @@
 <template>
   <div>
     <header>
-      <h1>选择城市</h1>
-
+      <div class="select">
+        <span>选择城市</span>
+        <select>
+          <option v-for="city in citys" :data-city-id="city">{{city}}</option>
+        </select>
+      </div>
+      <div class="select">
+        <span>选择活动类型</span>
+        <select>
+          <option v-for="type in types" :data-type-id="type">{{type}}</option>
+        </select>
+      </div>
     </header>
 
     <template>
@@ -20,7 +30,8 @@
   export default{
     data() {
       return {
-
+        cities: [],
+        types: []
       };
     },
   };
