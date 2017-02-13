@@ -30,7 +30,7 @@
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .items{
     white-space: nowrap;
     padding: 15px 0 20px 0;
