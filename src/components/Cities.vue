@@ -2,13 +2,13 @@
   <div>
     <header>
       <div class="select">
-        <span>选择城市</span>
+        <label>选择城市</label>
         <select>
-          <option v-for="city in citys" :data-city-id="city">{{city}}</option>
+          <option v-for="city in cities" :data-city-id="city">{{city}}</option>
         </select>
       </div>
       <div class="select">
-        <span>选择活动类型</span>
+        <label>选择活动类型</label>
         <select>
           <option v-for="type in types" :data-type-id="type">{{type}}</option>
         </select>
@@ -31,8 +31,18 @@
     data() {
       return {
         cities: [],
-        types: []
+        types: ['all', 'music', 'film', 'drama', 'commonweal', 'salon', 'exhibition', 'party', 'sports', 'travel', 'others'],
       };
+    },
+    methods: {
+      fetchCities() {
+        return this.$axios.get('/v2/loc/list');
+      },
+    },
+    mounted() {
+      this.fetchCities().then((response) => {
+        this.cities = response.data;
+      });
     },
   };
 </script>

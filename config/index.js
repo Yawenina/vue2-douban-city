@@ -23,7 +23,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/v2': {
-        target: 'http://api.douban.com/',
+        target: 'https://api.douban.com/',
         changeOrigin: true
       },
     },
