@@ -99,7 +99,7 @@
         this.cities = response.data.locs;
       });
       this.types.forEach((item) => {
-        this.fetchData(108288, item);
+        this.fetchData(118318, item);
       });
     },
   };

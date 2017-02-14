@@ -1,5 +1,5 @@
 <template>
-    <div class="subject">
+    <div class="subject details">
       <loading-bar ref="loadingBar" v-if="!subject"></loading-bar>
 
       <template v-else>
@@ -80,10 +80,6 @@
 </script>
 
 <style lang="scss" scoped>
-  section{
-      padding: 23px 18px;
-      border-bottom: 1px solid rgba(170, 170, 170, 0.1);
-  }
   .section-title{
     color: #aaa;
     font-weight: normal;
