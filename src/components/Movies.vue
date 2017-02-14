@@ -5,7 +5,7 @@
       <loading></loading>
     </div>
     <template v-else>
-      <section id="movie-showing">
+      <section id="movie-showing" class="horizontal-list">
         <header>
           <h2>影院热映</h2>
           <router-link to="/movie/in_theaters">更多</router-link>
@@ -15,7 +15,7 @@
         </div>
       </section>
 
-      <section id="movie-coming-soon">
+      <section id="movie-coming-soon" class="horizontal-list">
         <header>
           <h2>即将上映</h2>
           <router-link to="/movie/coming_soon">更多</router-link>
@@ -25,7 +25,7 @@
         </div>
       </section>
 
-      <section id="movie-latest">
+      <section id="movie-latest" class="horizontal-list">
         <header>
           <h2>Top250</h2>
           <router-link to="/movie/top250">更多</router-link>
@@ -69,16 +69,12 @@
       // 获取所需要的榜单的数据
       fetchData(api, data) {
         return this.$axios.get(api).then((response) => {
-          this.$data[data] = this.getFirstEightItems(response.data.subjects);
+          this.$data[data] = response.data.subjects.slice(0, 8);
           if (this.$refs.loadingBar) {
             this.$refs.loadingBar.finish();
             this.showLoading = false;
           }
         });
-      },
-      // 获取榜单的前8个数据
-      getFirstEightItems(data) {
-        return data.slice(0, 8);
       },
     },
   };

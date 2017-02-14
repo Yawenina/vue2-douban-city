@@ -16,7 +16,7 @@
     </header>
 
     <template>
-      <section id="movie-showing">
+      <section id="movie-showing" class="horizontal-list">
         <header>
           <h2>音乐类</h2>
           <router-link to="/movie/in_theaters">更多</router-link>
