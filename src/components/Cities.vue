@@ -16,29 +16,18 @@
     </header>
 
     <template>
-      <section id="movie-showing" class="horizontal-list">
-        <header>
-          <h2>音乐类</h2>
-          <router-link to="/movie/in_theaters">更多</router-link>
-        </header>
-        <div class="section-content">
-          <ul class="row items">
-            <li v-for="music in musics" class="item">
-              <img :src="music.image" class="item-poster">
-              <p class="item-title">{{music.title.slice(0, 10)}}...</p>
-              <p>{{music.time_str}}</p>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <city-list :items="musics" type="music" v-if="musics.length">
+        <h2>音乐类</h2>
+      </city-list>
     </template>
   </div>
 </template>
 
 <script>
-  import List from './List';
+  import cityList from './cityList';
 
   export default{
+    name: 'Cities',
     data() {
       return {
         cities: [],
@@ -46,7 +35,7 @@
         musics: [],
       };
     },
-    components: { List },
+    components: { cityList },
     methods: {
       fetchCities() {
         return this.$axios.get('/v2/loc/list');
