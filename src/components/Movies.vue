@@ -60,15 +60,19 @@
     },
     mounted() {
       this.$refs.loadingBar.start();
+      this.fetchData(this.getShowing(), 'showing');
+      this.fetchData(this.getComing(), 'coming');
+      this.fetchData(this.getTop(), 'top');
 //      当所有内容加载好时才显示页面，否则显示loading动画
-      this.$axios.all([this.getShowing(), this.getComing(), this.getTop()])
-        .then(this.$axios.spread((showing, coming, top) => {
-          this.showing = this.getFirstEightItems(showing.data.subjects);
-          this.coming = this.getFirstEightItems(coming.data.subjects);
-          this.top = this.getFirstEightItems(top.data.subjects);
-          this.$refs.loadingBar.finish();
-          this.showLoading = false;
-        }));
+
+//      this.$axios.all([this.getShowing(), this.getComing(), this.getTop()])
+//        .then(this.$axios.spread((showing, coming, top) => {
+//          this.showing = this.getFirstEightItems(showing.data.subjects);
+//          this.coming = this.getFirstEightItems(coming.data.subjects);
+//          this.top = this.getFirstEightItems(top.data.subjects);
+//          this.$refs.loadingBar.finish();
+//          this.showLoading = false;
+//        }));
     },
     methods: {
 //      获取所需要的榜单的数据
@@ -80,6 +84,15 @@
       },
       getTop() {
         return this.$axios.get('/v2/movie/top250');
+      },
+      fetchData(promise, data) {
+        promise.then((response) => {
+          this.$data[data] = this.getFirstEightItems(response.data.subjects);
+          if (this.$refs.loadingBar) {
+            this.$refs.loadingBar.finish();
+            this.showLoading = false;
+          }
+        });
       },
 //      获取榜单的前8个数据
       getFirstEightItems(data) {
