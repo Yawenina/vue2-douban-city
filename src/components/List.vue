@@ -1,6 +1,6 @@
 <!--榜单列表-->
 <template>
-  <ul class="row items">
+  <ul class="items">
     <li v-for="item in items" class="item">
       <router-link :to="'/movie/subject/' + item.id">
         <img class="item-poster" v-lazy="item.images.large">
@@ -31,37 +31,7 @@
 </script>
 
 <style lang="scss">
-  .items{
-    white-space: nowrap;
-    padding: 15px 0 20px 0;
-    overflow-x: auto;
-    &::-webkit-scrollbar{
-      display: none;
-    }
-  }
-  .item{
-    display: inline-block;
-    width:100px;
-    margin-left: 0.48rem;
-    text-align: center;
-
-    &:first-child{
-      margin-left: 1.12rem;
-    }
-
-    &:last-child{
-      margin-right: 1.12rem;
-    }
-  }
-  .item-poster{
-    display: inline-block;
-    width:100%;
-    height: 140px;
-  }
   .item-title{
-    margin-top: .6rem;
-    font-size: .94rem;
-    overflow: hidden;
     text-overflow: ellipsis;
   }
   .item-rating{

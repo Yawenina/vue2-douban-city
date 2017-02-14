@@ -6,17 +6,16 @@
     </header>
     <ul class="items">
       <li v-for="item in items" class="item">
-        <router-link :to="'/city/type/' + item.id">
-          <img :src="item.image" class="item-poster">
+        <router-link :to="'/event/' + item.id">
+          <img v-lazy="item.image" class="item-poster">
           <p class="item-title">{{item.title.slice(0, 13)}}...</p>
-          <p>{{item.time_str}}</p>
+          <p class="item-date">{{item.time_str}}</p>
         </router-link>
       </li>
     </ul>
   </section>
 </template>
-<style lang="scss">
-</style>
+
 <script>
   export default{
     props: {
@@ -29,3 +28,15 @@
     },
   };
 </script>
+
+<style lang="scss" scoped>
+  .item-title{
+    white-space: initial;
+    height:38px;
+    font-size: .9rem;
+  }
+  .item-date{
+    color: #aaa;
+    margin-top: 5px;
+  }
+</style>

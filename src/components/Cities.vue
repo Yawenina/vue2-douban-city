@@ -16,8 +16,8 @@
     </header>
 
     <template>
-      <city-list :items="musics" type="music" v-if="musics.length">
-        <h2>音乐类</h2>
+      <city-list :items="event.data" :type="type" v-for="(event, type) in events" v-if="event.data.length">
+        <h2>{{event.name}}</h2>
       </city-list>
     </template>
   </div>
@@ -26,13 +26,56 @@
 <script>
   import cityList from './cityList';
 
+  const events = {
+    music: {
+      name: '音乐类',
+      data: [],
+    },
+    film: {
+      name: '电影类',
+      data: [],
+    },
+    drama: {
+      name: '戏剧类',
+      data: [],
+    },
+    commonweal: {
+      name: '公益类',
+      data: [],
+    },
+    salon: {
+      name: '沙龙类',
+      data: [],
+    },
+    exhibition: {
+      name: '展览类',
+      data: [],
+    },
+    party: {
+      name: '聚会类',
+      data: [],
+    },
+    sports: {
+      name: '运动类',
+      data: [],
+    },
+    travel: {
+      name: '旅游类',
+      data: [],
+    },
+    others: {
+      name: '其他',
+      data: [],
+    },
+  };
+
   export default{
     name: 'Cities',
     data() {
       return {
         cities: [],
-        types: ['all', 'music', 'film', 'drama', 'commonweal', 'salon', 'exhibition', 'party', 'sports', 'travel', 'others'],
-        musics: [],
+        types: ['music', 'film', 'drama', 'commonweal', 'salon', 'exhibition', 'party', 'sports', 'travel', 'others'],
+        events,
       };
     },
     components: { cityList },
@@ -44,13 +87,19 @@
         const api = `/v2/event/list?loc=${loc}&type=${type}`;
         return this.$axios.get(api);
       },
+      fetchData(loc, type) {
+        const api = `/v2/event/list?loc=${loc}&type=${type}`;
+        this.$axios.get(api).then((response) => {
+          this.$data.events[type].data = response.data.events.slice(0, 8);
+        });
+      },
     },
     mounted() {
       this.fetchCities().then((response) => {
         this.cities = response.data.locs;
       });
-      this.fetchEvents(108288, 'music').then((response) => {
-        this.musics = response.data.events.slice(1, 9);
+      this.types.forEach((item) => {
+        this.fetchData(108288, item);
       });
     },
   };

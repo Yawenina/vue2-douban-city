@@ -9,6 +9,7 @@ import Movies from './components/Movies';
 import Cities from './components/Cities';
 import More from './components/More';
 import Subject from './components/Subject';
+import eventDetails from './components/eventDetails';
 
 Vue.use(VueRouter);
 Vue.use(VueLazyload, {
@@ -40,6 +41,10 @@ const router = new VueRouter({
     {
       path: '/cities',
       component: Cities,
+    },
+    {
+      path: '/event/:id',
+      component: eventDetails,
     },
   ],
 });
