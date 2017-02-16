@@ -10,19 +10,19 @@
       </div>
       <ul class="info-body">
         <li>
-          <span>活动时间</span>
+          <span><i class="fa fa-calendar"></i>活动时间</span>
           <span>{{event.time_str}}</span>
         </li>
         <li>
-          <span>举办地址</span>
+          <span><i class="fa fa-map-marker"></i>举办地址</span>
           <span>{{event.address}}</span>
         </li>
         <li>
-          <span>费用</span>
+          <span><i class="fa fa-ticket"></i>费用</span>
           <span>price_range</span>
         </li>
         <li>
-          <span>联系发起人</span>
+          <span><i class="fa fa-user-circle"></i>联系发起人</span>
           <span>
             <img v-lazy="event.owner.avatar">
             {{event.owner.name}}
@@ -61,5 +61,8 @@
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+  }
+  i[class^="fa"] {
+    padding-right: 5px;
   }
 </style>
