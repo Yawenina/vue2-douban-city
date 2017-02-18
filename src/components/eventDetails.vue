@@ -10,19 +10,19 @@
       </div>
       <ul class="info-body">
         <li>
-          <span><i class="fa fa-calendar"></i>活动时间</span>
+          <span class="info-item-title"><i class="fa fa-calendar"></i>活动时间</span>
           <span>{{event.time_str}}</span>
         </li>
         <li>
-          <span><i class="fa fa-map-marker"></i>举办地址</span>
+          <span class="info-item-title"><i class="fa fa-map"></i>举办地址</span>
           <span>{{event.address}}</span>
         </li>
         <li>
-          <span><i class="fa fa-ticket"></i>费用</span>
+          <span class="info-item-title"><i class="fa fa-ticket"></i>费用</span>
           <span>price_range</span>
         </li>
         <li>
-          <span><i class="fa fa-user-circle"></i>联系发起人</span>
+          <span class="info-item-title"><i class="fa fa-user-circle"></i>联系发起人</span>
           <span>
             <img v-lazy="event.owner.avatar">
             {{event.owner.name}}
@@ -57,12 +57,25 @@
 </script>
 
 <style lang="scss">
+  .details .info{
+    border-bottom-width: 0px;
+  }
+  .info-body {
+    margin-top: 10px;
+  }
   .info-body li{
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    padding: 12px 0px;
+    color: #aaa;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .info-item-title{
+    color: #000;
+    font-weight: bold;
   }
   i[class^="fa"] {
-    padding-right: 5px;
+    color: #aaa;
+    padding-right: 10px;
   }
 </style>
