@@ -3,16 +3,16 @@
     <header class="select-area">
       <div class="select">
         <label>选择城市</label>
-        <select>
-          <option v-for="city in cities" :data-city-id="city">{{city.name}}</option>
+        <select v-model="searchCity">
+          <option v-for="city in cities" :data-city-id="city" :value="city">{{city.name}}</option>
         </select>
       </div>
-      <div class="select">
+<!--       <div class="select">
         <label>选择活动类型</label>
         <select>
-          <option v-for="type in types" :data-type-id="type">{{type}}</option>
+          <option v-for="type in types" :data-type-id="type" v-model="searchType" :value="type">{{events[type].name}}</option>
         </select>
-      </div>
+      </div> -->
     </header>
 
     <template>
@@ -76,31 +76,38 @@
         cities: [],
         types: ['music', 'film', 'drama', 'commonweal', 'salon', 'exhibition', 'party', 'sports', 'travel', 'others'],
         events,
+        searchCity: '',
       };
     },
     components: { cityList },
     methods: {
-      fetchCities() {
+      getCities() {
         return this.$axios.get('/v2/loc/list');
       },
-      fetchEvents(loc, type) {
-        const api = `/v2/event/list?loc=${loc}&type=${type}`;
-        return this.$axios.get(api);
+      setCities(response) {
+        this.cities = response.data.locs;
+        this.searchCity = response.data.locs[0];
       },
-      fetchData(loc, type) {
+      fetchTypeEvents(loc, type) {
         const api = `/v2/event/list?loc=${loc}&type=${type}`;
         this.$axios.get(api).then((response) => {
           this.$data.events[type].data = response.data.events.slice(0, 8);
         });
       },
+      fetchAllTypesEvents() {
+        const searchCityId = this.searchCity.id;
+        this.types.forEach((item) => {
+          this.fetchTypeEvents(searchCityId, item);
+        });
+      },
+    },
+    watch: {
+      searchCity() {
+        this.fetchAllTypesEvents();
+      },
     },
     mounted() {
-      this.fetchCities().then((response) => {
-        this.cities = response.data.locs;
-      });
-      this.types.forEach((item) => {
-        this.fetchData(118318, item);
-      });
+      this.getCities().then(response => this.setCities(response));
     },
   };
 </script>
@@ -109,7 +116,23 @@
   .select-area{
     display: flex;
     justify-content: space-between;
-    padding: 10px 1.12rem;
+    padding: 5px 1.15rem;
+    font-size: .8rem;
+  }
+  select, select:focus{
+    font-size: inherit;
+    color: #42bd56;
+    padding: 5px 8px;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  select:focus{
+    outline: none;
   }
   .item-title{
     white-space: initial;
