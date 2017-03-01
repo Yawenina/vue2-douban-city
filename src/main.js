@@ -7,7 +7,7 @@ import VueLazyload from 'vue-lazyload';
 import App from './App';
 import Movies from './components/Movies';
 import Cities from './components/Cities';
-// import More from './components/More';
+import moreMovies from './components/moreMovies';
 import Subject from './components/Subject';
 import eventDetails from './components/eventDetails';
 
@@ -22,10 +22,10 @@ Vue.prototype.$axios = axios;
 
 const router = new VueRouter({
   routes: [
-    // {
-    //   path: '/:category/:type',
-    //   component: More,
-    // },
+    {
+      path: '/movie/:type',
+      component: moreMovies,
+    },
     {
       path: '/movies',
       component: Movies,
