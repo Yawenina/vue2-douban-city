@@ -3,7 +3,7 @@
     <div class="more">
       <loading-bar ref="loadingBar"></loading-bar>
       <loading v-if="!isDataLoaded"></loading>
-      <div class="content" v-else >
+      <div class="content" v-else @scroll="scrollHandler" ref="mainContent" v-set-height>
         <h2 class="category-title">{{$route.query.category}}</h2>
         <div class="more-currentRenderedData">
           <router-link v-for="item in currentRenderedData" class="item" :to="'/movie/subject/' + item.id">
@@ -25,17 +25,20 @@
   import loadingBar from './loadingBar';
   import loading from './Loading'
   import ratingStars from './ratingStars';
-  var infiniteScroll = require('vue-infinite-scroll').infiniteScroll;
 
   export default {
     name: 'moreMovies',
-    directives: {
-      infiniteScroll,
-    },
     components: {
       loadingBar,
       loading,
       ratingStars,
+    },
+    directives: {
+      setHeight: {
+        bind(el) {
+          el.style.height = window.innerHeight*.9 + "px";
+        }
+      }
     },
     data() {
       return {
@@ -53,7 +56,7 @@
 //        .then(response => (this.currentRenderedData = response.data.subjects.slice(0, 18)));
 //    },
     beforeRouteEnter(to, from, next) {
-      let api = `/v2/movie/${to.params.type}?start=0&count=10`;
+      let api = `/v2/movie/${to.params.type}`;
       next((vm) => {
         vm.$refs.loadingBar.start();
         vm.fetchData(api).then((response) => {
@@ -75,17 +78,19 @@
         return this.$axios.get(api);
       },
       loadMore() {
-        console.log(1)
-        if (this.currRenderedDataLen + 9 > this.allDataLen) return;
-        console.log(2)
-//        this.busy = true;
+        if (this.currRenderedDataLen >= this.allDataLen) return;
         this.currentRenderedData = this.currentRenderedData.concat(this.allData.slice(this.currRenderedDataLen, this.currRenderedDataLen + 9));
         this.currRenderedDataLen += 9;
-        console.log(3)
-//        this.busy = false;
       },
-      getScrollTop() {
-        console.log("scrolled")
+      scrollHandler() {
+        let ref = this.$refs.mainContent;
+        let scrollTop = ref.scrollTop,
+            scrollHeight = ref.scrollHeight,
+            clientHeight = ref.clientHeight;
+
+        if (scrollHeight - 10 <= scrollTop + clientHeight) {
+          this.loadMore();
+        }
       }
     },
   };
@@ -94,7 +99,7 @@
 
 <style lang="scss" scoped>
   .content{
-    height:500px;
+    height:100%;
     overflow:auto;
   }
   .category-title{
