@@ -3,7 +3,7 @@
     <div class="more">
       <loading-bar ref="loadingBar"></loading-bar>
       <loading v-if="!isDataLoaded"></loading>
-      <div class="content" v-else v-infinite-scroll="getScrollTop" @scroll="loadMore">
+      <div class="content" v-else >
         <h2 class="category-title">{{$route.query.category}}</h2>
         <div class="more-currentRenderedData">
           <router-link v-for="item in currentRenderedData" class="item" :to="'/movie/subject/' + item.id">
@@ -25,9 +25,13 @@
   import loadingBar from './loadingBar';
   import loading from './Loading'
   import ratingStars from './ratingStars';
+  var infiniteScroll = require('vue-infinite-scroll').infiniteScroll;
 
   export default {
     name: 'moreMovies',
+    directives: {
+      infiniteScroll,
+    },
     components: {
       loadingBar,
       loading,

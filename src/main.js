@@ -4,7 +4,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueLazyload from 'vue-lazyload';
-import vueInfiniteScroll from 'vue-infinite-scroll';
 import App from './App';
 import Movies from './components/Movies';
 import Cities from './components/Cities';
@@ -13,7 +12,6 @@ import Subject from './components/Subject';
 import eventDetails from './components/eventDetails';
 
 Vue.use(VueRouter);
-Vue.use(vueInfiniteScroll);
 Vue.use(VueLazyload, {
   loading: 'static/loading.gif',
   try: 3,
