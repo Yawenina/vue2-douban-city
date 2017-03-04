@@ -16,7 +16,7 @@
     </header>
 
     <template>
-      <city-list :items="event.data" :type="type" v-for="(event, type) in events" v-if="event.data.length">
+      <city-list :items="event.data" :type="type" :locId="searchCity.id" v-for="(event, type) in events" v-if="event.data.length">
         <h2>{{event.name}}</h2>
       </city-list>
     </template>

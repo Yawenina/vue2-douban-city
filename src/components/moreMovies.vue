@@ -31,6 +31,7 @@
   import loadingBar from './loadingBar';
   import loading from './Loading'
   import ratingStars from './ratingStars';
+  import { throttle } from '../Utils';
 
   export default {
     name: 'moreMovies',
