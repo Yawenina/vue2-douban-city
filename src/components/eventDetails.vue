@@ -19,7 +19,7 @@
         </li>
         <li>
           <span class="info-item-title"><i class="fa fa-ticket"></i>费用</span>
-          <span>price_range</span>
+          <span>{{event.price_range}}</span>
         </li>
         <li>
           <span class="info-item-title"><i class="fa fa-user-circle"></i>联系发起人</span>

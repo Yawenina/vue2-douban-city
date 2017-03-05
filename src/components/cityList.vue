@@ -2,7 +2,7 @@
   <section class="horizontal-list">
     <header>
       <slot></slot>
-      <router-link :to="'/eventsList?loc=' + locId + '&type=' + type">更多</router-link>
+      <router-link :to="'/eventList?loc_id=' + locId + '&type=' + type + '&loc_name=' + locName">更多</router-link>
     </header>
     <ul class="items">
       <li v-for="item in items" class="item">
@@ -22,6 +22,7 @@
       items: Array,
       type: String,
       locId: String,
+      locName: String,
     },
     data() {
       return {
