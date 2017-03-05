@@ -16,7 +16,7 @@
         </div>
       </router-link>
     </div>
-    <infinite-loading :on-infinite="getEventsList" ref="infiniteLoading">
+    <infinite-loading :on-infinite="getEventsList" ref="infiniteLoading" spinner="spiral">
       <span slot="no-more" class="no-more-data">没有更多啦:)</span>
     </infinite-loading>
   </div>
@@ -41,44 +41,40 @@
         currEventsCount: 0,
       };
     },
-    beforeRouteEnter(to, from, next) {
-      next((vm) => {
-        /* eslint-disable */
-        vm.locId = to.query.loc_id;
-        vm.locName = to.query.loc_name;
-        vm.type = to.query.type;
-//        vm.getEventsList();
-      })
+//    beforeRouteEnter(to, from, next) {
+//      next((vm) => {
+//        /* eslint-disable */
+//        vm.locId = to.query.loc_id;
+//        vm.locName = to.query.loc_name;
+//        vm.type = to.query.type;
+//      })
+//    },
+    watch: {
+      /* eslint-disable */
+      $route: {
+        handler: function () {
+          this.locId = this.$route.query.loc_id;
+          this.locName = this.$route.query.loc_name;
+          this.type = this.$route.query.type;
+        },
+        immediate: true,
+      },
     },
     methods: {
       getEventsList() {
         this.$axios.get(`/v2/event/list?loc=${this.locId}&type=${this.type}&start=${this.currEventsCount}`)
             .then((response) => {
-              let data = response.data;
+              const data = response.data;
               if (this.totalEvents === 0) this.totalEvents = data.total;
               this.events = this.events.concat(data.events);
               this.currEventsCount += data.count;
               this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
 
               if (this.currEventsCount >= this.totalEvents) {
-                this.currEventsCount == this.totalEvents;
+                this.currEventsCount = this.totalEvents;
                 this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
               }
-        })
-      },
-      loadMore() {
-        if (this.currEventsCount >= this.totalEvents) return;
-        this.getEventsList().then((response) => {
-          let data = response.data;
-          this.events = this.events.concat(data.events);
-          this.currEventsCount += data.count;
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
-
-          if (this.currEventsCount >= this.totalEvents) {
-            this.currEventsCount == this.totalEvents;
-            this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
-          }
-        })
+            });
       },
     },
   };
