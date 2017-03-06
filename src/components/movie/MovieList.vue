@@ -8,7 +8,7 @@
       <section id="movie-showing" class="horizontal-list">
         <header>
           <h2>影院热映</h2>
-          <router-link to="/movie/in_theaters?category=影院热映">更多</router-link>
+          <router-link to="/movie/in_theaters">更多</router-link>
         </header>
         <div class="section-content">
           <List :items="showing"></List>
@@ -18,7 +18,7 @@
       <section id="movie-coming-soon" class="horizontal-list">
         <header>
           <h2>即将上映</h2>
-          <router-link to="/movie/coming_soon?category=即将上映">更多</router-link>
+          <router-link to="/movie/coming_soon">更多</router-link>
         </header>
         <div class="section-content">
           <List :items="coming"></List>
@@ -28,7 +28,7 @@
       <section id="movie-latest" class="horizontal-list">
         <header>
           <h2>Top250</h2>
-          <router-link to="/movie/top250?category=Top250">更多</router-link>
+          <router-link to="/movie/top250">更多</router-link>
         </header>
         <div class="section-content">
           <List :items="top"></List>
@@ -39,12 +39,12 @@
 </template>
 
 <script>
-  import Loading from './Loading';
-  import loadingBar from './loadingBar';
-  import List from './List';
+  import Loading from '../Loading';
+  import loadingBar from '../loadingBar';
+  import List from '../List';
 
   export default {
-    name: 'movies',
+    name: 'MovieList',
     components: {
       List,
       Loading,
@@ -81,5 +81,5 @@
 </script>
 
 <style lang="scss">
-  @import '../assets/styles/_common.scss';
+  @import '../../assets/styles/common';
 </style>

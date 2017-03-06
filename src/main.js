@@ -6,10 +6,12 @@ import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueLazyload from 'vue-lazyload';
 import App from './App';
-import Movies from './components/Movies';
+
+import MovieList from './components/movie/MovieList';
+import MoreMovies from './components/movie/MoreMovies';
+import MovieDetails from './components/movie/MovieDetails';
+
 import Cities from './components/Cities';
-import moreMovies from './components/moreMovies';
-import Subject from './components/Subject';
 import eventDetails from './components/eventDetails';
 import eventList from './components/eventList';
 
@@ -25,31 +27,31 @@ Vue.prototype.$axios = axios;
 const router = new VueRouter({
   routes: [
     {
-      path: '/movie/:type',
-      component: moreMovies,
-    },
-    {
-      path: '/movies',
-      component: Movies,
+      path: '/movie',
+      component: MovieList,
       meta: {
         keepAlive: true,
       },
       alias: '/',
     },
     {
+      path: '/movie/:category',
+      component: MoreMovies,
+    },
+    {
       path: '/movie/subject/:id',
-      component: Subject,
+      component: MovieDetails,
     },
     {
       path: '/cities',
       component: Cities,
     },
     {
-      path: '/event/:id',
+      path: '/cities/event/:id',
       component: eventDetails,
     },
     {
-      path: '/eventList',
+      path: '/cities/events',
       component: eventList,
     },
   ],

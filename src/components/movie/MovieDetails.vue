@@ -46,8 +46,8 @@
 </template>
 
 <script>
-  import loadingBar from './loadingBar';
-  import ratingStars from './ratingStars';
+  import loadingBar from '../loadingBar';
+  import ratingStars from '../ratingStars';
 
   export default {
     name: 'Subject',

@@ -5,7 +5,7 @@
       <loading v-if="!isDataLoaded"></loading>
 
       <div class="content" v-else @scroll="scrollHandler" ref="mainContent" v-set-height>
-        <h2 class="category-title">{{$route.query.category}}</h2>
+        <h2 class="category-title">{{title}}</h2>
 
         <div class="more-currentRenderedData">
           <router-link v-for="item in currentRenderedData" class="item" :to="'/movie/subject/' + item.id">
@@ -28,13 +28,19 @@
 
 <script>
   /* eslint-disable */
-  import loadingBar from './loadingBar';
-  import loading from './Loading'
-  import ratingStars from './ratingStars';
-  import { throttle } from '../Utils';
+  import loadingBar from '../loadingBar';
+  import loading from '../Loading'
+  import ratingStars from '../ratingStars';
+  import { throttle } from '../../Utils';
+
+  const movieListMapping = {
+    "in_theaters": "影院热映",
+    "coming_soon": "即将上映",
+    "top250": "Top250",
+  }
 
   export default {
-    name: 'moreMovies',
+    name: 'MoreMovies',
     components: {
       loadingBar,
       loading,
@@ -49,6 +55,7 @@
     },
     data() {
       return {
+        title: movieListMapping[this.$route.params.type],
         isDataLoaded: false,
         allDataCount: 0,
         allDataLoaded: false,
