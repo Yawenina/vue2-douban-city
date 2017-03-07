@@ -7,13 +7,13 @@ import axios from 'axios';
 import VueLazyload from 'vue-lazyload';
 import App from './App';
 
-import MovieList from './components/movie/MovieList';
+import Movie from './components/movie/Movie';
 import MoreMovies from './components/movie/MoreMovies';
 import MovieDetails from './components/movie/MovieDetails';
 
-import Cities from './components/Cities';
-import eventDetails from './components/eventDetails';
-import eventList from './components/eventList';
+import Event from './components/event/Event';
+import MoreEvents from './components/event/MoreEvents';
+import EventDetails from './components/event/EventDetails';
 
 Vue.use(VueRouter);
 Vue.use(VueLazyload, {
@@ -28,7 +28,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/movie',
-      component: MovieList,
+      component: Movie,
       meta: {
         keepAlive: true,
       },
@@ -44,15 +44,15 @@ const router = new VueRouter({
     },
     {
       path: '/cities',
-      component: Cities,
-    },
-    {
-      path: '/cities/event/:id',
-      component: eventDetails,
+      component: Event,
     },
     {
       path: '/cities/events',
-      component: eventList,
+      component: MoreEvents,
+    },
+    {
+      path: '/cities/event/:id',
+      component: EventDetails,
     },
   ],
 });

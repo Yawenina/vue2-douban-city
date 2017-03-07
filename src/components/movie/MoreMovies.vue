@@ -2,11 +2,9 @@
 <template>
     <div class="more">
       <loading-bar ref="loadingBar"></loading-bar>
-      <loading v-if="!isDataLoaded"></loading>
-
-      <div class="content" v-else @scroll="scrollHandler" ref="mainContent" v-set-height>
+      <div v-if="isDataLoaded"><clip-loading></loading></div>
+      <div class="content" @scroll="scrollHandler" ref="mainContent" v-set-height>
         <h2 class="category-title">{{title}}</h2>
-
         <div class="more-currentRenderedData">
           <router-link v-for="item in currentRenderedData" class="item" :to="'/movie/subject/' + item.id">
             <img class="item-poster" v-lazy="item.images.large">
@@ -29,7 +27,7 @@
 <script>
   /* eslint-disable */
   import loadingBar from '../loadingBar';
-  import loading from '../Loading'
+  import clipLoading from '../ClipLoading'
   import ratingStars from '../ratingStars';
   import { throttle } from '../../Utils';
 
@@ -43,7 +41,7 @@
     name: 'MoreMovies',
     components: {
       loadingBar,
-      loading,
+      clipLoading,
       ratingStars,
     },
     directives: {
@@ -74,7 +72,7 @@
 //    },
     beforeRouteEnter(to, from, next) {
       next((vm) => {
-        vm.api = `/v2/movie/${to.params.type}?count=9`;
+        vm.api = `/v2/movie/${to.params.category}?count=9`;
         vm.$refs.loadingBar.start();
         vm.fetchData(vm.api).then((response) => {
           let data = response.data;

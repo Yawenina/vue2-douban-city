@@ -16,18 +16,18 @@
     </header>
 
     <template>
-      <city-list :items="event.data" :type="type" :locId="searchCity.id" :locName="searchCity.name"
+      <event-list :items="event.data" :type="type" :locId="searchCity.id" :locName="searchCity.name"
                  v-for="(event, type) in eventsData"
                  v-if="event.data.length">
         <h2>{{event.name}}</h2>
-      </city-list>
+      </event-list>
     </template>
   </div>
 </template>
 
 <script>
-  import cityList from './cityList';
-  import { eventsName } from '../Utils';
+  import EventList from './EventList';
+  import { eventsName } from '../../Utils';
 
   const eventsData = {};
   Object.keys(eventsName).forEach((key) => {
@@ -47,7 +47,7 @@
         searchCity: '',
       };
     },
-    components: { cityList },
+    components: { EventList },
     methods: {
       getCities() {
         return this.$axios.get('/v2/loc/list');

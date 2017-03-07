@@ -8,7 +8,7 @@
           </a>
           <nav class="mainNav">
             <ul>
-              <li class="movies"><router-link to="/movies">电影</router-link></li>
+              <li class="movies"><router-link to="/movie">电影</router-link></li>
               <li class="cities"><router-link to="/cities">同城</router-link></li>
               <li class="search"><img src="./assets/search.png"></li>
             </ul>
