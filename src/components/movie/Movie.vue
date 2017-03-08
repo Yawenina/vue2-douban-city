@@ -1,7 +1,6 @@
 <template>
   <div class="card">
     <div class="loading-wrapper" v-if="showLoading">
-      <loading-bar ref="loadingBar"></loading-bar>
       <clip-loading :loading="showLoading"></clip-loading>
     </div>
     <template v-else>
@@ -40,7 +39,6 @@
 
 <script>
   import ClipLoading from '../ClipLoading';
-  import loadingBar from '../loadingBar';
   import MovieList from './MovieList';
 
   export default {
@@ -48,7 +46,6 @@
     components: {
       MovieList,
       ClipLoading,
-      loadingBar,
     },
     data() {
       return {
@@ -60,7 +57,6 @@
     },
     mounted() {
       // 当所有内容加载好时才显示页面，否则显示loading动画
-      this.$refs.loadingBar.start();
       this.fetchData('/v2/movie/in_theaters', 'showing');
       this.fetchData('/v2/movie/coming_soon', 'coming');
       this.fetchData('/v2/movie/top250', 'top');
@@ -70,10 +66,6 @@
       fetchData(api, data) {
         return this.$axios.get(api).then((response) => {
           this.$data[data] = response.data.subjects.slice(0, 8);
-          if (this.$refs.loadingBar) {
-            this.$refs.loadingBar.finish();
-            this.showLoading = false;
-          }
         });
       },
     },

@@ -3,8 +3,8 @@
     <header class="select-area">
       <div class="select">
         <label>选择城市</label>
-        <select v-model="searchCity">
-          <option v-for="city in cities" :data-city-id="city" :value="city">{{city.name}}</option>
+        <select v-model="searchLoc">
+          <option v-for="loc in locs" :data-loc-id="loc" :value="loc">{{loc.name}}</option>
         </select>
       </div>
 <!--       <div class="select">
@@ -16,7 +16,7 @@
     </header>
 
     <template>
-      <event-list :items="event.data" :type="type" :locId="searchCity.id" :locName="searchCity.name"
+      <event-list :items="event.data" :type="type" :locId="searchLoc.id" :locName="searchLoc.name"
                  v-for="(event, type) in eventsData"
                  v-if="event.data.length">
         <h2>{{event.name}}</h2>
@@ -27,12 +27,12 @@
 
 <script>
   import EventList from './EventList';
-  import { eventsName } from '../../Utils';
+  import { eventsMapping } from '../../Utils';
 
   const eventsData = {};
-  Object.keys(eventsName).forEach((key) => {
+  Object.keys(eventsMapping).forEach((key) => {
     eventsData[key] = {
-      name: eventsName[key],
+      name: eventsMapping[key],
       data: [],
     };
   });
@@ -41,10 +41,10 @@
     name: 'Cities',
     data() {
       return {
-        cities: [],
+        locs: [],
         types: ['music', 'film', 'drama', 'commonweal', 'salon', 'exhibition', 'party', 'sports', 'travel', 'others'],
         eventsData,
-        searchCity: '',
+        searchLoc: '',
       };
     },
     components: { EventList },
@@ -53,8 +53,8 @@
         return this.$axios.get('/v2/loc/list');
       },
       setCities(response) {
-        this.cities = response.data.locs;
-        this.searchCity = response.data.locs[0];
+        this.locs = response.data.locs;
+        this.searchLoc = response.data.locs[0];
       },
       fetchTypeEvents(loc, type) {
         const api = `/v2/event/list?loc=${loc}&type=${type}`;
@@ -63,14 +63,14 @@
         });
       },
       fetchAllTypesEvents() {
-        const searchCityId = this.searchCity.id;
+        const searchLocId = this.searchLoc.id;
         this.types.forEach((item) => {
-          this.fetchTypeEvents(searchCityId, item);
+          this.fetchTypeEvents(searchLocId, item);
         });
       },
     },
     watch: {
-      searchCity() {
+      searchLoc() {
         this.fetchAllTypesEvents();
       },
     },

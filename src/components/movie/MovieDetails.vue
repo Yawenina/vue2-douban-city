@@ -46,14 +46,12 @@
 </template>
 
 <script>
-  import loadingBar from '../loadingBar';
   import ratingStars from '../ratingStars';
 
   export default {
     name: 'Subject',
     components: {
       ratingStars,
-      loadingBar,
     },
     data() {
       return {
@@ -64,9 +62,7 @@
       const api = `/v2/${to.fullPath}`;
       /* eslint no-param-reassign: ["error", { "props": false }] */
       next((vm) => {
-        vm.$refs.loadingBar.start();
         vm.fetchData(api).then((response) => {
-          vm.$refs.loadingBar.finish();
           vm.subject = response.data;
         });
       });

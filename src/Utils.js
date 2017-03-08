@@ -42,7 +42,7 @@ export function throttle(fn, delay) {
 }
 
 
-export const eventsName = {
+export const eventsMapping = {
   music: '音乐类',
   film: '电影类',
   drama: '戏剧类',

@@ -1,9 +1,8 @@
 <!--更多电影列表-->
 <template>
     <div class="more">
-      <loading-bar ref="loadingBar"></loading-bar>
-      <div v-if="isDataLoaded"><clip-loading></loading></div>
-      <div class="content" @scroll="scrollHandler" ref="mainContent" v-set-height>
+      <div v-if="!isDataLoaded"><clip-loading></loading></div>
+      <div class="content" v-else @scroll="scrollHandler" ref="mainContent" v-set-height>
         <h2 class="category-title">{{title}}</h2>
         <div class="more-currentRenderedData">
           <router-link v-for="item in currentRenderedData" class="item" :to="'/movie/subject/' + item.id">
@@ -26,7 +25,6 @@
 
 <script>
   /* eslint-disable */
-  import loadingBar from '../loadingBar';
   import clipLoading from '../ClipLoading'
   import ratingStars from '../ratingStars';
   import { throttle } from '../../Utils';
@@ -40,7 +38,6 @@
   export default {
     name: 'MoreMovies',
     components: {
-      loadingBar,
       clipLoading,
       ratingStars,
     },
@@ -53,7 +50,7 @@
     },
     data() {
       return {
-        title: movieListMapping[this.$route.params.type],
+        title: movieListMapping[this.$route.params.category],
         isDataLoaded: false,
         allDataCount: 0,
         allDataLoaded: false,
@@ -73,12 +70,10 @@
     beforeRouteEnter(to, from, next) {
       next((vm) => {
         vm.api = `/v2/movie/${to.params.category}?count=9`;
-        vm.$refs.loadingBar.start();
         vm.fetchData(vm.api).then((response) => {
           let data = response.data;
           vm.allDataCount = data.total;
           vm.updateDataInfo(data.subjects, data.count);
-          vm.$refs.loadingBar.finish();
           vm.isDataLoaded = true;
         })
       })

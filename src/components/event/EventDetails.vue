@@ -44,7 +44,7 @@
       };
     },
     created() {
-      this.fetchData(`/v2/${this.$route.fullPath}`);
+      this.fetchData(`/v2/event/${this.$route.params.id}`);
     },
     methods: {
       fetchData(api) {
