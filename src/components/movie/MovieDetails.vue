@@ -1,6 +1,6 @@
 <template>
     <div class="subject details">
-      <loading-bar ref="loadingBar" v-if="!subject"></loading-bar>
+      <clip-loading ref="loadingBar" v-if="!subject"></clip-loading>
 
       <template v-else>
         <section class="subject-poster">
@@ -46,11 +46,13 @@
 </template>
 
 <script>
+  import clipLoading from '../ClipLoading';
   import ratingStars from '../ratingStars';
 
   export default {
     name: 'Subject',
     components: {
+      clipLoading,
       ratingStars,
     },
     data() {

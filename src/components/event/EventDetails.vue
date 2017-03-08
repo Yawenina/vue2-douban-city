@@ -1,5 +1,6 @@
 <template>
-  <div class="details" v-if="event">
+  <clipLoading v-if="!event"></clipLoading>
+  <div class="details" v-else>
     <section class="poster">
       <img v-lazy="event.image">
     </section>
@@ -37,7 +38,10 @@
 </template>
 
 <script>
+  import clipLoading from '../ClipLoading';
+
   export default{
+    components: { clipLoading },
     data() {
       return {
         event: null,

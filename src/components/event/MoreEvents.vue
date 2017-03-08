@@ -1,5 +1,6 @@
 <template>
-  <div class="events-wrapper">
+  <clip-loading v-if="!events.length"></clip-loading>
+  <div class="events-wrapper" v-else>
     <h1 class="nav">{{ locName }} >> {{ eventsMapping[type] }}</h1>
     <router-link class="event-item" v-for="event in events" tag="div" :to="'/cities/event/' + event.id">
       <div class="event-poster">
@@ -21,11 +22,12 @@
 
 <script>
   import InfiniteLoading from 'vue-infinite-loading';
+  import clipLoading from '../ClipLoading';
   import { eventsMapping } from '../../Utils';
 
   export default{
     name: 'eventList',
-    components: { InfiniteLoading },
+    components: { InfiniteLoading, clipLoading },
     data() {
       return {
         isLoadComplete: false,

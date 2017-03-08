@@ -1,5 +1,6 @@
 <template>
-  <div class="card">
+  <clipLoading v-if="locs.length === 0"></clipLoading>
+  <div class="card" v-else>
     <header class="select-area">
       <div class="select">
         <label>选择城市</label>
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+  import clipLoading from '../ClipLoading';
   import EventList from './EventList';
   import { eventsMapping } from '../../Utils';
 
@@ -47,7 +49,7 @@
         searchLoc: '',
       };
     },
-    components: { EventList },
+    components: { EventList, clipLoading },
     methods: {
       getCities() {
         return this.$axios.get('/v2/loc/list');

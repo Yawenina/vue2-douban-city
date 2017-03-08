@@ -1,8 +1,6 @@
 <template>
   <div class="card">
-    <div class="loading-wrapper" v-if="showLoading">
-      <clip-loading :loading="showLoading"></clip-loading>
-    </div>
+    <clip-loading v-if="showLoading"></clip-loading>
     <template v-else>
       <section id="movie-showing" class="horizontal-list">
         <header>
@@ -66,6 +64,7 @@
       fetchData(api, data) {
         return this.$axios.get(api).then((response) => {
           this.$data[data] = response.data.subjects.slice(0, 8);
+          this.showLoading = false;
         });
       },
     },
