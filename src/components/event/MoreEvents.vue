@@ -59,7 +59,7 @@
             this.currEventsCount += data.count;
             this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
             if (this.currEventsCount >= this.totalEvents) {
-              this.currEventsCount == this.totalEvents;
+              this.currEventsCount = this.totalEvents;
               this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
             }
           })
