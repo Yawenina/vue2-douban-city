@@ -2,7 +2,10 @@
   <section class="horizontal-list">
     <header>
       <slot></slot>
-      <router-link :to="'/cities/events?loc_id=' + locId + '&type=' + type + '&loc_name=' + locName">更多</router-link>
+      <router-link 
+        :to="'/cities/events?loc_id=' + locId + '&type=' + type + '&loc_name=' + locName">
+        更多
+      </router-link>
     </header>
     <ul class="items">
       <li v-for="item in items" class="item">

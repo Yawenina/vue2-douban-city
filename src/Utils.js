@@ -53,45 +53,5 @@ export const eventsMapping = {
   sports: '运动类',
   travel: '旅游类',
   others: '其他',
-  // music: {
-  //   name: '音乐类',
-  //   data: [],
-  // },
-  // film: {
-  //   name: '电影类',
-  //   data: [],
-  // },
-  // drama: {
-  //   name: '戏剧类',
-  //   data: [],
-  // },
-  // commonweal: {
-  //   name: '公益类',
-  //   data: [],
-  // },
-  // salon: {
-  //   name: '沙龙类',
-  //   data: [],
-  // },
-  // exhibition: {
-  //   name: '展览类',
-  //   data: [],
-  // },
-  // party: {
-  //   name: '聚会类',
-  //   data: [],
-  // },
-  // sports: {
-  //   name: '运动类',
-  //   data: [],
-  // },
-  // travel: {
-  //   name: '旅游类',
-  //   data: [],
-  // },
-  // others: {
-  //   name: '其他',
-  //   data: [],
-  // },
 };
 

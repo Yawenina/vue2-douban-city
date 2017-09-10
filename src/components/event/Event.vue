@@ -8,19 +8,19 @@
           <option v-for="loc in locs" :data-loc-id="loc" :value="loc">{{loc.name}}</option>
         </select>
       </div>
-<!--       <div class="select">
-        <label>选择活动类型</label>
-        <select>
-          <option v-for="type in types" :data-type-id="type" v-model="searchType" :value="type">{{eventsData[type].name}}</option>
-        </select>
-      </div> -->
     </header>
 
     <template>
-      <event-list :items="event.data" :type="type" :locId="searchLoc.id" :locName="searchLoc.name"
-                 v-for="(event, type) in eventsData"
-                 v-if="event.data.length">
-        <h2>{{event.name}}</h2>
+      <event-list 
+        :items="event.data" 
+        :type="type" 
+        :locId="searchLoc.id"   
+        :locName="searchLoc.name"
+        v-for="(event, type) in eventsData"
+        v-if="event.data.length">
+        <h2>
+          {{event.name}}
+        </h2>
       </event-list>
     </template>
   </div>

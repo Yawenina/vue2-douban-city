@@ -2,10 +2,20 @@
 <template>
     <div class="more">
       <div v-if="!isDataLoaded"><clip-loading></loading></div>
-      <div class="content" v-else @scroll="scrollHandler" ref="mainContent" v-set-height>
+      <div 
+        v-else 
+        class="content"
+        @scroll="scrollHandler" 
+        ref="mainContent" 
+        v-set-height
+      >
         <h2 class="category-title">{{title}}</h2>
         <div class="more-currentRenderedData">
-          <router-link v-for="item in currentRenderedData" class="item" :to="'/movie/subject/' + item.id">
+          <router-link 
+            v-for="item in currentRenderedData" 
+            class="item" 
+            :to="'/movie/subject/' + item.id"
+          >
             <img class="item-poster" v-lazy="item.images.large">
             <p class="item-title">{{item.title}}</p>
             <div class="item-rating">
@@ -61,12 +71,6 @@
         isLoadComplete: true,
       };
     },
-//    created() {
-//      const routeParams = this.$route.params;
-//      const api = `/v2/${routeParams.category}/${routeParams.type}`;
-//      this.$axios.get(api)
-//        .then(response => (this.currentRenderedData = response.data.subjects.slice(0, 18)));
-//    },
     beforeRouteEnter(to, from, next) {
       next((vm) => {
         vm.api = `/v2/movie/${to.params.category}?count=9`;

@@ -2,7 +2,12 @@
   <clip-loading v-if="!events.length"></clip-loading>
   <div class="events-wrapper" v-else>
     <h1 class="nav">{{ locName }} >> {{ eventsMapping[type] }}</h1>
-    <router-link class="event-item" v-for="event in events" tag="div" :to="'/cities/event/' + event.id">
+
+    <router-link 
+      class="event-item" 
+      v-for="event in events" 
+      tag="div" 
+      :to="'/cities/event/' + event.id">
       <div class="event-poster">
         <img :src="event.image">
       </div>
@@ -15,7 +20,11 @@
         </ul>
       </div>
     </router-link>
-    <infinite-loading :on-infinite="getEventsList" ref="infiniteLoading"></infinite-loading>
+
+    <infinite-loading 
+      :on-infinite="getEventsList" 
+      ref="infiniteLoading">
+    </infinite-loading>
   </div>
   </div>
 </template>
@@ -54,10 +63,13 @@
         this.$axios.get(`/v2/event/list?loc=${this.locId}&type=${this.type}&start=${this.currEventsCount}`)
           .then((response) => {
             let data = response.data;
+
             if (this.totalEvents === 0) this.totalEvents = data.total;
+
             this.events = this.events.concat(data.events);
             this.currEventsCount += data.count;
             this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+
             if (this.currEventsCount >= this.totalEvents) {
               this.currEventsCount = this.totalEvents;
               this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
@@ -65,14 +77,14 @@
           })
       },
       loadMore() {
-        console.log(1)
         if (this.currEventsCount >= this.totalEvents) return;
-        console.log(2)
+
         this.getEventsList().then((response) => {
           let data = response.data;
           this.events = this.events.concat(data.events);
           this.currEventsCount += data.count;
           this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+          
           if (this.currEventsCount >= this.totalEvents) {
             this.currEventsCount == this.totalEvents;
             this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
